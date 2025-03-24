@@ -5,14 +5,14 @@ import myImage from "./assets/icons8-tree-80.png";
 const { Kakao } = window;
 
 console.log(">>>> MBIT");
-
+const KAKAO_KEY = import.meta.env.VITE_KAKAO_API;
 export default function MBTITest() {
   // 재랜더링시에 실행되게 해준다.
   useEffect(() => {
     // init 해주기 전에 clean up 을 해준다.
     Kakao.cleanup();
     // 자신의 js 키를 넣어준다.
-    Kakao.init(import.meta.env.VITE_KAKAO_API);
+    Kakao.init(KAKAO_KEY);
     // 잘 적용되면 true 를 뱉는다.
     console.log(Kakao.isInitialized());
   }, []);
