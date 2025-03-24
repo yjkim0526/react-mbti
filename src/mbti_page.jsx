@@ -72,7 +72,8 @@ export default function MBTITest() {
     // );
 
     // 배포한 자신의 사이트
-    const realUrl = "http://localhost:5175/";
+    // const realUrl = "http://localhost:5175/";
+    const realUrl = "https://react-mbti-blue.vercel.app/";
     // 로컬 주소 (localhost 3000 같은거)
     const resultUrl = window.location.href;
 
