@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { questions_mbti, questions_options } from "./question";
 import MbtiTypeResult from "./mbti_type_result";
 import myImage from "./assets/icons8-tree-80.png";
-const { Kakao } = window;
+// const { Kakao } = window;
 
 console.log(">>>> MBIT");
 const KAKAO_KEY = import.meta.env.VITE_KAKAO_API;
