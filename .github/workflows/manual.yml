@@ -23,7 +23,7 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@EC2_PUBLIC_IP << 'EOF'
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@ec2-15-164-213-127.ap-northeast-2.compute.amazonaws.com << 'EOF'
             cd /usr/share/nginx/react-mbti
             git pull origin main
             npm install
