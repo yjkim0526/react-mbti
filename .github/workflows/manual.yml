@@ -24,6 +24,7 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@15.164.213.127 << 'EOF'
             cd /usr/share/nginx/react-mbti
+            git config --global --add safe.directory /usr/share/nginx/react-mbti
             git pull origin main
             npm install
             npm run build
