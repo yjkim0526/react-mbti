@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { questions_mbti, questions_options } from "./question";
 import MbtiTypeResult from "./mbti_type_result";
 import myImage from "./assets/icons8-tree-80.png";
+import.meta.env.VITE_API_KEY;
 const { Kakao } = window;
 
 export default function MBTITest() {
