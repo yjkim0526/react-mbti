@@ -6,16 +6,17 @@ const { Kakao } = window;
 
 console.log(">>>> MBIT");
 const KAKAO_KEY = import.meta.env.VITE_KAKAO_API;
+
 export default function MBTITest() {
   // 재랜더링시에 실행되게 해준다.
-  useEffect(() => {
-    // init 해주기 전에 clean up 을 해준다.
-    Kakao.cleanup();
-    // 자신의 js 키를 넣어준다.
-    Kakao.init(KAKAO_KEY);
-    // 잘 적용되면 true 를 뱉는다.
-    console.log(Kakao.isInitialized());
-  }, []);
+  // useEffect(() => {
+  //   // init 해주기 전에 clean up 을 해준다.
+  //   Kakao.cleanup();
+  //   // 자신의 js 키를 넣어준다.
+  //   Kakao.init(KAKAO_KEY);
+  //   // 잘 적용되면 true 를 뱉는다.
+  //   console.log(Kakao.isInitialized());
+  // }, []);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({
@@ -64,42 +65,42 @@ export default function MBTITest() {
     );
   };
 
-  const shareKakao = () => {
-    const result = getMBTIResult();
-    // const url = `https://example.com/mbti?result=${result}`;
-    // window.open(
-    //   `https://sharer.kakao.com/talk/friends/picker/link?url=${encodeURIComponent(
-    //     url
-    //   )}`
-    // );
+  // const shareKakao = () => {
+  //   const result = getMBTIResult();
+  //   // const url = `https://example.com/mbti?result=${result}`;
+  //   // window.open(
+  //   //   `https://sharer.kakao.com/talk/friends/picker/link?url=${encodeURIComponent(
+  //   //     url
+  //   //   )}`
+  //   // );
 
-    // 배포한 자신의 사이트
-    // const realUrl = "http://localhost:5175/";
-    const realUrl = "https://react-mbti-blue.vercel.app/";
-    // 로컬 주소 (localhost 3000 같은거)
-    const resultUrl = window.location.href;
+  //   // 배포한 자신의 사이트
+  //   // const realUrl = "http://localhost:5175/";
+  //   const realUrl = "https://react-mbti-blue.vercel.app/";
+  //   // 로컬 주소 (localhost 3000 같은거)
+  //   const resultUrl = window.location.href;
 
-    Kakao.Share.sendDefault({
-      objectType: "feed",
-      content: {
-        title: "MBTI",
-        description: "MBTI 결과는?",
-        imageUrl:
-          "https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
-        link: {
-          mobileWebUrl: realUrl,
-        },
-      },
-      buttons: [
-        {
-          title: "MBTI 보러가기",
-          link: {
-            mobileWebUrl: realUrl,
-          },
-        },
-      ],
-    });
-  };
+  //   Kakao.Share.sendDefault({
+  //     objectType: "feed",
+  //     content: {
+  //       title: "MBTI",
+  //       description: "MBTI 결과는?",
+  //       imageUrl:
+  //         "https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
+  //       link: {
+  //         mobileWebUrl: realUrl,
+  //       },
+  //     },
+  //     buttons: [
+  //       {
+  //         title: "MBTI 보러가기",
+  //         link: {
+  //           mobileWebUrl: realUrl,
+  //         },
+  //       },
+  //     ],
+  //   });
+  // };
 
   const sendEmail = () => {
     const result = getMBTIResult();
@@ -122,12 +123,12 @@ export default function MBTITest() {
             <MbtiTypeResult mbti={getMBTIResult()} />
           </div>
           <div className="mt-10 flex flex-col xg:flex-row md:flex-row  gap-6 justify-center items-center">
-            <button
+            {/* <button
               onClick={shareKakao}
               className="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 "
             >
               카카오톡 공유하기
-            </button>
+            </button> */}
             {/* <KakaoShare /> */}
             <button
               onClick={sendEmail}
