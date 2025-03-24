@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { questions_mbti, questions_options } from "./question";
 import MbtiTypeResult from "./mbti_type_result";
 import myImage from "./assets/icons8-tree-80.png";
-import.meta.env.VITE_API_KEY;
 const { Kakao } = window;
+
+console.log(">>>> MBIT");
 
 export default function MBTITest() {
   // 재랜더링시에 실행되게 해준다.
@@ -11,7 +12,7 @@ export default function MBTITest() {
     // init 해주기 전에 clean up 을 해준다.
     Kakao.cleanup();
     // 자신의 js 키를 넣어준다.
-    Kakao.init(import.meta.env.VITE_API_KEY);
+    Kakao.init(import.meta.env.VITE_KAKAO_API);
     // 잘 적용되면 true 를 뱉는다.
     console.log(Kakao.isInitialized());
   }, []);
