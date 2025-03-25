@@ -23,16 +23,23 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@15.164.213.127 << 'EOF'
+
+            echo "Changing ownership of the repository..."
+            sudo chown -R ubuntu:ubuntu /usr/share/nginx/react-mbti
+            echo "cd /usr/share/nginx/react-mbti"
             cd /usr/share/nginx/react-mbti
+            # git config --global --add safe.directory /usr/share/nginx/react-mbti
+            echo "git pull origin main"
             git pull origin main
+            echo "npm install"
             npm install
+            echo "npm run build"
             npm run build
             
-            # PM2를 사용하여 React 앱 실행
-            # pm2 delete react-app || true
-            # pm2 start npm --name "react-app" -- start
-            # pm2 save
+            echo "pm2 restart react-app"
+            pm2 restart react-app || pm2 start npm --name "react-app" -- start
             
             # Nginx 재시작
+            echo "systemctl restart nginx"
             sudo systemctl restart nginx
           EOF
