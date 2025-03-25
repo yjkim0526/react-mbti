@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import { questions_mbti, questions_options } from "./question";
 import MbtiTypeResult from "./mbti_type_result";
 import myImage from "./assets/icons8-tree-80.png";
+// `window.Kakao`를 사용하기 위해 window 객체에서 Kakao를 가져옵니다.
 const { Kakao } = window;
 
 console.log(">>>> MBIT");
 const KAKAO_KEY = import.meta.env.VITE_KAKAO_API;
 
 export default function MBTITest() {
-  // 재랜더링시에 실행
   useEffect(() => {
-    // init 해주기 전에 clean up 을 해준다.
+    // init 해주기 전에 clean up을 해준다.
     Kakao.cleanup();
     // 자신의 js 키를 넣어준다.
     Kakao.init(KAKAO_KEY);
-    // 잘 적용되면 true 를 뱉는다.
+    // 잘 적용되면 true를 뱉는다.
     console.log(Kakao.isInitialized());
   }, []);
 
@@ -50,52 +50,45 @@ export default function MBTITest() {
     }
   };
 
+  const initialAnswers = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+
   const handleReset = () => {
     setCurrentQuestion(0);
-    setAnswers({ E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 });
+    setAnswers(initialAnswers);
     setShowResult(false);
   };
 
   const getMBTIResult = () => {
-    return (
-      (answers["E"] >= answers["I"] ? "E" : "I") +
-      (answers["S"] >= answers["N"] ? "S" : "N") +
-      (answers["T"] >= answers["F"] ? "T" : "F") +
-      (answers["J"] >= answers["P"] ? "J" : "P")
-    );
+    const types = [
+      ["E", "I"],
+      ["S", "N"],
+      ["T", "F"],
+      ["J", "P"],
+    ];
+
+    return types.map(([a, b]) => (answers[a] >= answers[b] ? a : b)).join("");
   };
 
   const shareKakao = () => {
     const result = getMBTIResult();
-    // const url = `https://example.com/mbti?result=${result}`;
-    // window.open(
-    //   `https://sharer.kakao.com/talk/friends/picker/link?url=${encodeURIComponent(
-    //     url
-    //   )}`
-    // );
-
-    // 배포한 자신의 사이트
-    // const realUrl = "http://localhost:5175/";
-    const realUrl = "http://react.koiforever.p-e.kr/";
-    // 로컬 주소 (localhost 3000 같은거)
-    const resultUrl = window.location.href;
+    const resultUrl = `http://react.koiforever.p-e.kr/result?mbti=${result}`; // 결과를 포함한 URL
 
     Kakao.Share.sendDefault({
       objectType: "feed",
       content: {
-        title: "MBTI",
-        description: "MBTI 결과는?",
+        title: "MBTI 테스트 결과",
+        description: `당신의 MBTI 유형은 ${result}입니다!`,
         imageUrl:
           "https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg",
         link: {
-          mobileWebUrl: realUrl,
+          mobileWebUrl: resultUrl, // 결과 값을 포함한 URL 공유
         },
       },
       buttons: [
         {
-          title: "MBTI 보러가기",
+          title: "MBTI 결과 보기",
           link: {
-            mobileWebUrl: realUrl,
+            mobileWebUrl: resultUrl,
           },
         },
       ],
